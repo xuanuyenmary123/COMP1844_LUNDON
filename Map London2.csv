@@ -1,0 +1,30 @@
+From Station,To Station,Line,Distance,Colour
+Paddington,Edgware Road,Bakerloo,642,#B36305
+Edgware Road,Marylebone,Bakerloo,496,#B36305
+Marylebone,Baker Street,Bakerloo,500,#B36305
+Baker Street,Regent's Park,Bakerloo,807,#B36305
+Regent's Park,Oxford Circus,Bakerloo,977,#B36305
+Oxford Circus,Piccadilly Circus,Bakerloo,907,#B36305
+Piccadilly Circus,Charing Cross,Bakerloo,748,#B36305
+King's Cross St Pancras,Russell Square,Piccadilly,906,#003688
+Russell Square,Holborn,Piccadilly,700,#003688
+Holborn,Covent Garden,Piccadilly,618,#003688
+Covent Garden,Leicester Square,Piccadilly,346,#003688
+Leicester Square,Piccadilly Circus,Piccadilly,484,#003688
+Piccadilly Circus,Green Park,Piccadilly,643,#003688
+Camden Town,Mornington Crescent,Northern,620,#000000
+Mornington Crescent,Euston,Northern,865,#000000
+Euston,Tottenham Court Road,Northern,1610,#000000
+Tottenham Court Road,Leicester Square,Northern,581,#000000
+Leicester Square,Charing Cross,Northern,429,#000000
+Charing Cross,Embankment,Northern,303,#000000
+Marble Arch,Bond Street,Central,657,#E32017
+Bond Street,Oxford Circus,Central,574,#E32017
+Oxford Circus,Tottenham Court Road,Central,771,#E32017
+Tottenham Court Road,Holborn,Central,717,#E32017
+Holborn,Bank,Central,2310,#E32017
+King's Cross St Pancras,Euston,Victoria,808,#0098D4
+Euston,Warren Street,Victoria,666,#0098D4
+Warren Street,Oxford Circus,Victoria,1150,#0098D4
+Oxford Circus,Green Park,Victoria,1050,#0098D4
+Green Park,Victoria,Victoria,1160,#0098D4

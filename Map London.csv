@@ -1,0 +1,6 @@
+From Station,To Station,Line,Distance,Colour
+Oxford Circus,Piccadilly Circus,Bakerloo,907,#B36305
+Piccadilly Circus,Charing Cross,Bakerloo,748,#B36305
+Leicester Square,Piccadilly Circus,Piccadilly,484,#003688
+Covent Garden,Leicester Square,Piccadilly,346,#003688
+Leicester Square,Charing Cross,Northern,429,#000000
