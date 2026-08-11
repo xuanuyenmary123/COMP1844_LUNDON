@@ -36,6 +36,14 @@ class Graph:
             for edge in neighbours:
                 print(edge)
 
+
+LINE_COLOURS = {
+    "Piccadilly": "#003688",
+    "Northern": "#000000",
+    "Bakerloo": "#B36305"
+    
+}
+
 def load_data(file_name):
     try:
         dataframe = pd.read_csv(file_name)
@@ -49,8 +57,7 @@ def validate_data(dataframe):
         "From Station",
         "To Station",
         "Line",
-        "Distance",
-        "Colour"
+        "Distance"
     ]
     for column in required_columns:
         if column not in dataframe.columns:
@@ -64,7 +71,7 @@ def build_graph(dataframe):
             row["To Station"],
             row["Distance"],
             row["Line"],
-            row["Colour"]
+           LINE_COLOURS.get(row["Line"], "#666666")
         )
     return graph
 
@@ -167,11 +174,11 @@ def draw_graph(G):
     )
 
     label_config = {
-        "Oxford Circus": (1.160, 10.82, "left", "center", 0),
+        "Oxford Circus": (1.160, 10.101, "left", "center", 0),
         "Piccadilly Circus": (2.033, 6.359, "right", "top", 18),
-        "Covent Garden": (5.0, 7.7, "left", "center", 0),
-        "Leicester Square": (3.9, 6.2, "left", "center", 0),
-        "Charing Cross": (3.6, 2.5, "center", "top", 0),
+        "Covent Garden": (4.847, 7.7, "left", "center", 0),
+        "Leicester Square": (3.725, 6.2, "left", "center", 0),
+        "Charing Cross": (3.6, 2.853, "center", "top", 0),
     }
 
     # Draw station names
@@ -191,62 +198,35 @@ def draw_graph(G):
         )
 
     # Distance labels
-    drawn = set()
+        
+    edge_labels = {}
 
     for u, v, data in G.edges(data=True):
-        edge = tuple(sorted((u, v)))
-        if edge in drawn:
-            continue
-        drawn.add(edge)
 
         x1, y1 = positions[u]
         x2, y2 = positions[v]
 
-        # Midpoint of the edge
-        mx = (x1 + x2) / 2
-        my = (y1 + y2) / 2
-
-        # Rotation angle of the edge
-        angle = np.degrees(np.arctan2(y2 - y1, x2 - x1))
-
-        # Keep text upright
-        if angle > 90:
-            angle -= 180
-        elif angle < -90:
-            angle += 180
-
-        # Unit vector perpendicular to the edge
-        dx = x2 - x1
-        dy = y2 - y1
-        length = np.hypot(dx, dy)
-
-        if length != 0:
-            px = -dy / length
-            py = dx / length
+        if (x1 > x2) or (x1 == x2 and y1 > y2):
+            edge = (v, u)
         else:
-            px = py = 0
+            edge = (u, v)
 
-        # Move the label slightly away from the line
-        offset = 0.10
-        mx += px * offset
-        my += py * offset
+        edge_labels[edge] = f"{data['distance']} km"
 
-        ax.text(
-            mx,
-            my,
-            f"{data['distance']} m",
-            fontsize=8,
-            color="black",
-            ha="center",
-            va="center",
-            bbox=dict(
-                boxstyle="square,pad=0.10",
-                fc="white",
-                ec="none",
-                alpha=1.0
-            ),
-            zorder=6
-        )
+    nx.draw_networkx_edge_labels(
+        G,
+        positions,
+        edge_labels=edge_labels,
+        font_size=10,
+        rotate=90,
+        label_pos=0.5,
+        bbox=dict(
+            facecolor="white",
+            edgecolor="none",
+            pad=1
+        ),
+        ax=ax
+    )
     legend = [
         Line2D([0], [0], color="blue", lw=2, label="Piccadilly"),
         Line2D([0], [0], color="black", lw=2, label="Northern"),
